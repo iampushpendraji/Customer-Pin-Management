@@ -1,0 +1,7 @@
+<app-create-new-entity 
+    moduleName="Create Customer"
+    [regionList]="regionList" 
+    [countriesOfRegion]="countriesOfRegion"
+    [isLoading]="isLoading"
+    (regionSelectEmit)="getCountriesFromRegion($event)"
+    (formSubmitEmit)="onSubmit($event)"></app-create-new-entity>

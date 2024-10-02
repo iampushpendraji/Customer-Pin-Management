@@ -1,0 +1,66 @@
+<div class="h-100 w-100 d-flex align-items-center justify-content-center">
+
+    <form [formGroup]="addEntityForm" (ngSubmit)="submitClickHandler()"
+        class="w-lg-25 p-5 border border-dark rounded shadow shadow-sm">
+
+        <h2 class="mb-5 text-uppercase">{{ moduleName }}</h2>
+
+        <!-- Title input field -->
+        <div class="form-group mb-3">
+            <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+            <input type="text" id="title" formControlName="title" class="form-control"
+                [ngClass]="( addEntityForm.get('title')?.dirty || addEntityForm.get('title')?.touched ) && ( addEntityForm.get('title')?.hasError('required') ) ? 'is-invalid' : ''" />
+        </div>
+
+        <!-- This fields are related to customer creation -->
+        <ng-container *ngIf="this.moduleName == 'Create Customer'">
+            <!-- Email input field -->
+            <div class="form-group mb-3">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                <input type="email" id="email" formControlName="email" class="form-control"
+                    [ngClass]="( addEntityForm.get('email')?.dirty || addEntityForm.get('email')?.touched ) && ( addEntityForm.get('email')?.hasError('required') || addEntityForm.get('email')?.hasError('pattern') ) ? 'is-invalid' : ''" />
+            </div>
+    
+            <!-- Region selection box -->
+            <div class="form-group mb-3">
+                <label for="region" class="form-label">Region <span class="text-danger">*</span></label>
+                <ngx-select formControlName="region" [items]="regionList" (selectionChanges)="selectRegionHandler($event)"
+                    [class]="( addEntityForm.get('region')?.dirty || addEntityForm.get('region')?.touched ) && ( addEntityForm.get('region')?.hasError('required') ) ? 'is-invalid' : ''"></ngx-select>
+            </div>
+    
+            <!-- Country selection box -->
+            <div class="form-group mb-4">
+                <label for="country" class="form-label">Country <span class="text-danger">*</span></label>
+                <ngx-select [ngStyle]="countriesOfRegion.length <= 0 ? { 'pointerEvents': 'none' } : { '' : '' }" formControlName="country" [items]="countriesOfRegion"
+                    [ngClass]="( addEntityForm.get('country')?.dirty || addEntityForm.get('country')?.touched ) && ( addEntityForm.get('country')?.hasError('required') ) ? 'is-invalid' : ''"></ngx-select>
+            </div>
+        </ng-container>
+
+        <!-- This fields are related to pin creation -->
+        <ng-container *ngIf="this.moduleName == 'Create Pin'">
+            <!-- Select Collaboratory selection box -->
+            <div class="form-group mb-4">
+                <label for="country" class="form-label">Select Collaboratory <span class="text-danger">*</span></label>
+                <ngx-select formControlName="collaboratory" [items]="collaboratoryList"
+                    [ngClass]="( addEntityForm.get('collaboratory')?.dirty || addEntityForm.get('collaboratory')?.touched ) && ( addEntityForm.get('collaboratory')?.hasError('required') ) ? 'is-invalid' : ''"></ngx-select>
+            </div>
+
+            
+
+            <!-- Privacy radio buttons -->
+            <div class="form-group mb-4">
+                <label for="country" class="form-label">Privacy <span class="text-danger">*</span></label>
+                <br>
+                <input type="radio" value="private" formControlName="privacy" /> Private 
+                <input type="radio" value="public" formControlName="privacy" /> Public
+            </div>
+        </ng-container>
+
+        <div class="d-flex align-items-center justify-content-between">
+            <button class="btn btn-dark" type="submit" [disabled]="isLoading">Submit</button>
+            <a (click)="jumpToPage('/')" class="text-underline pointer">Go to list of pins</a>
+        </div>
+
+    </form>
+
+</div>

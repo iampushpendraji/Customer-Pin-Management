@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+.is-invalid .ngx-select__toggle {
+    /* For showing error in ngx-select */
+    border: 1px solid red !important;
+}
+
+.ngx-select__toggle {
+    /* For matching border color of ngx-select with bootstrap inputs */
+    border-color: #dee2e6 !important;
+}
+
+.pointer {
+    cursor: pointer;
+    /* Changes cursor to pointer on hover */
+}
