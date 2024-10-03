@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-.is-invalid .ngx-select__toggle {
+.is-invalid .ngx-select {
     /* For showing error in ngx-select */
     border: 1px solid red !important;
 }

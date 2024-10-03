@@ -7,12 +7,14 @@ import { ListOfPinsComponent } from './components/list-of-pins/list-of-pins.comp
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ToasterCommonComponent } from './components/toaster-common/toaster-common.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListOfPinsComponent,
     NotFoundComponent,
+    ToasterCommonComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { DataShareService } from 'src/app/services/data-share.service';
 
 interface CountryInfo {
   country: string;
@@ -13,8 +14,9 @@ interface CountryInfo {
 })
 
 export class AddCustomersComponent implements OnInit {
-
   private _apiCallService: ApiCallService = inject(ApiCallService);
+  private _dataShareService: DataShareService = inject(DataShareService);
+
   public isLoading: boolean = false;
   public regionData: Record<string, CountryInfo> = {};
   public regionList: string[] = [];
@@ -48,10 +50,12 @@ export class AddCustomersComponent implements OnInit {
             localStorage.setItem('region-data', JSON.stringify(response.data));
             resolve(response.data);
           } else {
+            this._dataShareService.sendNotification(false, 'Error in getting region data !');
             reject('Error in getting region data');
           }
         },
         error: (error) => {
+          this._dataShareService.sendNotification(false, 'Error in getting region data !');
           reject('Error in getting region data, ERROR -->> ' + error);
         }
       });
@@ -92,6 +96,7 @@ export class AddCustomersComponent implements OnInit {
       storedCustomers = [data];
     }
     localStorage.setItem('customers', JSON.stringify(storedCustomers));
+    this._dataShareService.sendNotification(true, "Customer created successfully !");
   }
 
 }

@@ -1,1 +1,55 @@
-<p>list-of-pins works!</p>
+<div class="container">
+    <div class="row mt-5">
+        <!-- Heading and routes section -->
+        <div class="col">
+            <h2 class="text-dark">List Of Pins</h2>
+        </div>
+        <div class="col text-end">
+            <!-- Buttons to navigate to Add Pin and Add Customer pages -->
+            <button class="btn btn-primary route-btn" routerLink="/pins">+ Add Pin</button>
+            <button class="btn btn-warning route-btn ms-3" routerLink="/customers">+ Add Customer</button>
+        </div>
+    </div>
+
+    <!-- Display the table only if there are pins -->
+    <ng-container *ngIf="pins && pins.length > 0">
+        <!-- Table of pins -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Collaboratory</th>
+                                <th>Privacy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iterate over each pin and display its details -->
+                            <tr *ngFor="let pin of pins">
+                                <td>{{ pin.title }}</td>
+                                <td>
+                                    <img [src]="pin.img" alt="{{ pin.title }}" class="img-fluid" style="max-width: 100px; height: auto;" />
+                                </td>
+                                <td>
+                                    <!-- Display each collaboratory item on a new line -->
+                                    <div *ngFor="let collab of pin.collaboratory">
+                                        {{ collab }}
+                                    </div>
+                                </td>
+                                <td>{{ pin.privacy }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- Message to display when there are no pins -->
+    <div *ngIf="!pins || pins.length <= 0" class="mt-5 d-flex justify-content-center">
+        <h5 class="text-danger">No pins exist. Please create pins first!</h5>
+    </div>
+</div>

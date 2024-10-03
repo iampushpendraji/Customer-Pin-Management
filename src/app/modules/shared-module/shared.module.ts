@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateNewEntityComponent } from './create-new-entity/create-new-entity.component';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -14,10 +14,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     NgxSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ],
   exports: [
     CreateNewEntityComponent
   ]
 })
+
 export class SharedModule { }
